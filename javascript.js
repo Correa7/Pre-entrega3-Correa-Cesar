@@ -1,8 +1,7 @@
 
 /*                               INDEX.HTML                              */
 
-
-
+  
 const productos = [ 
     {id: 1, nombre: "Remera" ,categoria: "ROPA", precio: 2499.99 ,stock: 10, img: "./img/t-shirt.jpg"  }, 
     {id: 2, nombre: "Pelota Futbol",categoria: "DEPORTE", precio: 4499.99 ,stock: 5, img: "./img/pelota-futbol.jpg"  },
@@ -12,13 +11,8 @@ const productos = [
     {id: 6, nombre: "Raqueta Paddle" ,categoria: "DEPORTE", precio: 10299.99 ,stock: 3, img: "./img/raqueta-paddle.jpg"  }
 ]
 
-
-
+/* linea 78 index  */
 let contenedor = document.getElementById("contenedor")
-
-
-
-
 
 
 
@@ -49,8 +43,7 @@ function renderizar (array) {
         </div>
         
         `
-        
-        
+          
         contenedor.append(tarjetaBody)
     }
     
@@ -58,20 +51,26 @@ function renderizar (array) {
 
 renderizar(productos)
 
+/*  Buscador  linea 46 index    */ 
+
 let input = document.getElementById("input")
 
 let boton = document.getElementById("buscador")
 
+
 boton.addEventListener("click", buscar)
+
+/* Con esta funcion si funciona  */
 
 // input.addEventListener("input", buscar)
 
 function buscar () {
 
-    console.log ("Funciona")
-    console.log (input.value)
 
-    let productofiltrado = productos.filter (producto => producto.nombre.includes (input.value))
+    console.log ("Funciona")   // para comprobar que el evento "click" funciona
+     
+    console.log (input.value) // para comprobar que toma el value del input
+    alert (input.value)       // al sacar esto y habilitar la funcion no anda....
 
     // let productofiltrado = productos.filter (producto => producto.nombre.toLowerCase().includes (input.value.toLowerCase()) || producto.categoria.toLowerCase().includes (input.value.toLowerCase()) )
     
@@ -86,7 +85,7 @@ function buscar () {
 /*                                  CART.HTML                                     */
 
 
-let carrito = document.getElementById("cart-row")
+//  let carrito = document.getElementById("cart-row")
 
 
 
