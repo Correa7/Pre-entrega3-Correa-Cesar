@@ -8,12 +8,12 @@
 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
-       
-    <title>INDEX</title>
+    
+    <title>Tu Tienda Online</title>
 
     <link rel="stylesheet" href="./style.css">
 
-    <link rel="icon" href="">
+    <link rel="icon" href="./images/c3.png">
 
 
 </head>
@@ -32,9 +32,17 @@
             <li class="nav-item active">
               <a class="nav-link" href="./index.html">Store <span class="sr-only"></span></a>
             </li>
-            <!-- <li class="nav-item active">
-              <a class="nav-link" href="">checkout <span class="sr-only"></span></a>
-            </li> -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
             <li class="nav-item active">
               <a class="nav-link" href="./cart.html">cart <span class="sr-only"></span></a>
             </li>
@@ -43,16 +51,11 @@
 
           <div class="search">
 
-<!--                 Buscador                 -->
-
-
             <form class="d-flex" role="search">
                 <input id="input" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
                 <button id="buscador" class="btn btn-dark" >Search</button>
             </form>
-            
 
-<!--                 End  Buscador   -->
 
           </div>
 
@@ -62,7 +65,8 @@
                <a href="./cart.html">
                   <img  id="cart-icon" src="images/cart.png">
               </a>
-              <p id="cart-total">#</p>
+              <!-- render items en cart -->
+              <div id="cart-nav"></div>
       
           </div>
         </div>
@@ -71,28 +75,41 @@
       <!--  End Navbar -->
 
 
-
-
-
-
     <div id="contenedor" class="contenedor" ></div>
 
-
-
-
-
-    
-
-
-
-    <script src="./javascript.js"></script>
-
+    <br><br>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="box-element">
+          <table class="table">
+            <tr>
+                <!-- Elemento renderizable del total -->
+                <th><div id="total"></div></th>
+                <!-- final de renderizable del total -->  
+              </tr>
+          </table>
+        </div>
+  
+       <br>
+        <div class="box-element">
+          <div class="cart-row">
+            <div style="flex:2"></div>
+            <div style="flex:2"><strong>Item</strong></div>
+            <div style="flex:1"><strong>Price</strong></div>
+            <div style="flex:1"><strong>Quantity</strong></div>
+            <div style="flex:1"><strong>Total</strong></div>
+          </div>
+          <!-- elemento renderizable del carro -->
+              <div id="cart-row"></div>
+          <!-- final del elemento renderizable del carro -->
+        </div>
+      </div>
+    </div>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./javascript.js"></script>
   
 </body> 
 </html>
