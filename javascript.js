@@ -39,8 +39,6 @@ if( localStorage.getItem("Carrito")){
 }else {
     totalRenderVacio(carrito)
 }
-
-
 /*                       Buscador       Filtros                        */
 let ropa = document.getElementById("ropa")
 let calzado = document.getElementById("calzado")
@@ -65,13 +63,11 @@ function buscar (e) {
 function renderizar (array) {
     
     contenedor.innerHTML = ""
-    
     for (const producto of array) {
         
         let tarjetaBody = document.createElement("div")
         tarjetaBody.className= "col-lg-4"
         tarjetaBody.innerHTML= `
-
         <div class="div-img" ><img class="thumbnail" src="${producto.img}"></div>
         <div class="box-element product">
             <h6><strong>${ producto.nombre }</strong></h6>
@@ -107,8 +103,8 @@ function addItem (e) {
     }
     totalFinal= carrito.reduce((a, b ) => a + b.subtotal, 0)
     unidades= carrito.reduce((a, b ) => a + b.unidades, 0)
-    renderizarCarro(carrito) 
-    renderizarTotal(carrito)      
+    renderizarCarro(carrito)
+    totalRender(carrito)      
 }
 /*                     Renderizar Carrito                     */
 function renderizarCarro(array){
@@ -117,8 +113,6 @@ function renderizarCarro(array){
         let cart = document.createElement("div")
         cart.className= "cart-render"
         cart.innerHTML= `
-        
-        
         <div class="cart-row">
         <div  style="flex:2"><img class="row-image" src="${producto.img}"></div>
         <div  style="flex:2"><p>${producto.nombre}</p></div>
@@ -126,24 +120,23 @@ function renderizarCarro(array){
         <div style="flex:1">
         <p class="quantity">${producto.unidades}</p>
         <div class="quantity">
-        <img id="${producto.id}" class="chg-quantity update-cart add" src="images/arrow-up.png">
-        <img id="${producto.id}" class="chg-quantity update-cart" src="images/arrow-down.png">
+        <img id="${producto.id}" class="chg-quantity update-cart " src="images/arrow-up.png">
+        <img id="${producto.id}" class="chg-quantity-2 update-cart" src="images/arrow-down.png">
         </div>
         </div>
         <div style="flex:1"><p>$${producto.subtotal.toFixed(2)}</p></div>
         </div>
         `
-        
         carritoRender.append(cart) 
     }
-    let add = document.getElementsByClassName("chg-quantity update-cart add")
+    let add = document.getElementsByClassName("chg-quantity update-cart")
     for(let a of add) {
         a.addEventListener ("click", addItem)
     }
-    let remove = document.getElementsByClassName("chg-quantity update-cart")
+    let remove = document.getElementsByClassName("chg-quantity-2 update-cart")
     for(let b of remove) {
         b.addEventListener ("click", removeItem )
-    }  
+    } 
 }
 /*               Eliminar Items del Carrito            */
 function removeItem (e){
@@ -167,7 +160,7 @@ function removeItem (e){
     unidades= carrito.reduce((a, b ) => a + b.unidades, 0)
     
     renderizarCarro(carrito) 
-    renderizarTotal(carrito)	
+    totalRender(carrito)	
 }
 /*                   Renderizar Total de Precio y Unidades del Carrito             */
 function totalRender (array){
@@ -177,7 +170,7 @@ function totalRender (array){
     let totalResumen = document.createElement("div")
     totalResumen.className= "total"
     totalResumen.innerHTML = `
-    <h5>Items: <strong>${unidades}</strong></h5>
+    <h5>Items: <strong>${unidades} </strong></h5>
     <h5>Total:<strong> $ ${totalFinal.toFixed(2)}</strong></h5>
     <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a>
     `
@@ -198,31 +191,6 @@ function totalRender (array){
     let clear = document.getElementById("clear")
     clear.addEventListener("click", borrarStorage )
 }
-function renderizarTotal (array) {
-    total.innerHTML=""
-    let totalResumen = document.createElement("div")
-    totalResumen.className= "total"
-    totalResumen.innerHTML = `
-    <th><h5>Items: <strong>${unidades}</strong></h5></th>
-    <th><h5>Total:<strong> $ ${totalFinal.toFixed(2)}</strong></h5></th>
-    <th><a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a></th> 
-    `
-    total.append (totalResumen)
-    cartNav.innerHTML=""
-    if(array.lenght != 0){
-        let parrafo = document.createElement("div")
-        parrafo.className = "cart-total"
-        parrafo.innerHTML= `<p>${unidades}</p>`    
-        cartNav.append (parrafo)   
-    }else{
-        let parrafo = document.createElement("div")
-        parrafo.className = "cart-total"
-        parrafo.innerHTML= `<p>0</p>`    
-        cartNav.append (parrafo)   
-    }
-    let clear = document.getElementById("clear")        
-    clear.addEventListener("click", borrarStorage )
-}
 function totalRenderVacio (array){
 
     total.innerHTML=""
@@ -236,7 +204,6 @@ function totalRenderVacio (array){
     total.append (totalResumen)
 
     cartNav.innerHTML=""
-
     let parrafo = document.createElement("div")
     parrafo.className = "cart-total"
     parrafo.innerHTML= `<p>0</p>`    

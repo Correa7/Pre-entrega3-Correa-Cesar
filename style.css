@@ -1,7 +1,6 @@
 
 body{
 	background-color: hsl(0, 0%, 98%);
-	padding:5px;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -94,6 +93,7 @@ h1,h2,h3,h4,h5,h6{
     margin-bottom: 10px;
     border-bottom: 1px solid #ececec;
 }
+
 .quantity{
 	display: inline-block;
 	font-weight: 700;
@@ -107,6 +107,16 @@ h1,h2,h3,h4,h5,h6{
 	transition:.1s;
 }
 .chg-quantity:hover{
+	opacity: .6;
+}
+.chg-quantity-2{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+.chg-quantity-2:hover{
 	opacity: .6;
 }
 .hidden{
