@@ -6,16 +6,19 @@ body{
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }
+.logo {
+	width: 100px;
+	height: 40px;
+	margin-right:40px;
+	margin-left: 20px ;
+}
 .precio {
 	margin-right: 20px;
 }
 .search{
 	margin-right: 40px;	
 }
-.contenedor{
-	display: flex;
-	flex-wrap: wrap;
-}	
+
 .box-element{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
 	background-color: #fff;
@@ -42,8 +45,10 @@ h1,h2,h3,h4,h5,h6{
 #cart-icon{
 	width:25px;
 	display: inline-block;
+	/* margin-right: 10px; */
 	margin-left: 15px;
 }
+
 .cart-total{
 	display: block;
 	text-align: center;
@@ -58,9 +63,12 @@ h1,h2,h3,h4,h5,h6{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	margin:5px
+	align-items: center;
+	padding: 5px;
 }
 .contenedor {
+	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
     padding: 20px;
 }
