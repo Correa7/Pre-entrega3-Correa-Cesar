@@ -1,29 +1,34 @@
 
-/*                               INDEX.HTML                              */
-
-
-
 const productos = [ 
-    {id: 1, nombre: "Remera" ,categoria: "ROPA", precio: 2499.99 ,stock: 10, img: "./img/t-shirt.jpg"  }, 
-    {id: 2, nombre: "Pelota Futbol",categoria: "DEPORTE", precio: 4499.99 ,stock: 5, img: "./img/pelota-futbol.jpg"  },
-    {id: 3, nombre: "Pelota Tenis" ,categoria: "DEPORTE", precio: 1200 ,stock:4, img: "./img/pelota-tenis.jpg"  },
-    {id: 4, nombre: "Zapatilla" ,categoria: "CALZADO", precio: 25499.99 ,stock:10, img: "./img/shoes.jpg"  },
-    {id: 5, nombre: "Short" ,categoria: "ROPA", precio: 2999.99 ,stock:5, img: "./img/short.jpg"  },
-    {id: 6, nombre: "Raqueta Paddle" ,categoria: "DEPORTE", precio: 10299.99 ,stock: 3, img: "./img/raqueta-paddle.jpg"  }
+    {id: 01, nombre: "La Remera de DIOS" ,categoria: "ROPA", precio: 99999.99 ,stock: 1, img: "./img/rem-6.jpg"  },
+    {id: 18, nombre: "Remera Optimus-Boxeo" ,categoria: "ROPA", precio: 2650 ,stock: 10, img: "./img/rem-5.webp"  }, 
+    {id: 02, nombre: "Remera Optimus-Grey" ,categoria: "ROPA", precio: 2499.99 ,stock: 10, img: "./img/rem-1.webp"  },
+    {id: 03, nombre: "Remera Diablus-Black" ,categoria: "ROPA", precio: 2299.99 ,stock: 10, img: "./img/rem-2.jpg"  },
+    {id: 04, nombre: "Remera Diablus-White" ,categoria: "ROPA", precio: 2299.99 ,stock: 10, img: "./img/rem-4.webp"  },
+    {id: 05, nombre: "Remera Diablus-Grey" ,categoria: "ROPA", precio: 2299.99 ,stock: 10, img: "./img/rem-3.webp"  },
+    {id: 06, nombre: "Adidas Super Star W-Lisa" ,categoria: "CALZADO", precio: 28499.99 ,stock:10, img: "./img/zap-5.jpg"  },
+    {id: 07, nombre: "Adidas Super Star W-Colors" ,categoria: "CALZADO", precio: 32499.99 ,stock:10, img: "./img/zap-1.jpg"  },
+    {id: 08, nombre: "Adidas Super Star B-Colors " ,categoria: "CALZADO", precio: 32499.99 ,stock:10, img: "./img/zap-2.jpg"  },
+    {id: 09, nombre: "Adidas Super Star Black " ,categoria: "CALZADO", precio: 32499.99 ,stock:10, img: "./img/zap-3.jpg"  },
+    {id: 10, nombre: "Adidas Super Star Pink " ,categoria: "CALZADO", precio: 30499.99 ,stock:10, img: "./img/zap-4.jpg"  },
+    {id: 11, nombre: "Guantes Everlast Box-White " ,categoria: "DEPORTE", precio: 10299.99 ,stock: 3, img: "./img/dep.webp"  },
+    {id: 12, nombre: "Guantes Everlast Box-Black" ,categoria: "DEPORTE", precio: 10299.99 ,stock: 3, img: "./img/dep-1.jpg"  },
+    {id: 13, nombre: "Pack Everlast Box" ,categoria: "DEPORTE", precio: 30499.99 ,stock: 3, img: "./img/dep-3.webp"  },
+    {id: 14, nombre: "Vendas Everlast" ,categoria: "DEPORTE", precio: 1200 ,stock:4, img: "./img/dep-2.webp"  },
+    {id: 15, nombre: "Colchoneta Everlast",categoria: "DEPORTE", precio: 2500 ,stock: 5, img: "./img/dep-5.webp"  },
+    {id: 16, nombre: "Pack Bandas" ,categoria: "DEPORTE", precio: 5000 ,stock: 3, img: "./img/dep-6.jpg"  },
+    {id: 17, nombre: "Pack Pesas" ,categoria: "DEPORTE", precio: 15299.99 ,stock: 3, img: "./img/dep-4.jpg"  }
 ]
-
-
 
 let carritoJSON = ""
 let totalFinal = ""
 let unidades = ""
 let contenedor = document.getElementById("contenedor")
-let input = document.getElementById("input")
-let boton = document.getElementById("buscador")
 let carritoRender = document.getElementById("cart-row")
 let carritoRender2 = document.getElementById("cart-row-2")
 let total = document.getElementById("total")
 let cartNav = document.getElementById("cart-nav")
+
 renderizar(productos)
 
 let carrito = []
@@ -35,14 +40,25 @@ if( localStorage.getItem("Carrito")){
 
 
 /*                       Buscador       Filtros                        */
-boton.addEventListener("click", buscar)
-
+let ropa = document.getElementById("ropa")
+let calzado = document.getElementById("calzado")
+let deportes = document.getElementById("deporte")
+ropa.addEventListener("click", filtroCategoria)
+calzado.addEventListener("click", filtroCategoria)
+deportes.addEventListener("click", filtroCategoria)
+function filtroCategoria (e){
+    e.preventDefault()
+    let categoriafiltrado = productos.filter (producto => producto.categoria.toLowerCase() == e.target.id )
+    renderizar(categoriafiltrado)
+}
+let input = document.getElementById("input")
+let button = document.getElementById("buscador")
+button.addEventListener("click", buscar)
 function buscar (e) {
     e.preventDefault()
-    let productofiltrado = productos.filter (producto => producto.nombre.toLowerCase().includes (input.value.toLowerCase()) || producto.categoria.toLowerCase().includes (input.value.toLowerCase()) )
-    renderizar(productofiltrado)
+    let productoFiltrado = productos.filter (producto => producto.nombre.toLowerCase().includes (input.value.toLowerCase()) || producto.categoria.toLowerCase().includes (input.value.toLowerCase()) )
+    renderizar(productoFiltrado)
 }
-
 /*                           Renderizar productos                  */
 function renderizar (array) {
     
@@ -53,7 +69,8 @@ function renderizar (array) {
         let tarjetaBody = document.createElement("div")
         tarjetaBody.className= "col-lg-4"
         tarjetaBody.innerHTML= `
-        <img class="thumbnail" src="${producto.img}">
+
+        <div class="div-img" ><img class="thumbnail" src="${producto.img}"></div>
         <div class="box-element product">
             <h6><strong>${ producto.nombre }</strong></h6><hr>
             <button id ="${producto.id}" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
@@ -67,8 +84,7 @@ function renderizar (array) {
     for (boton of agregarCarrito) {
         boton.addEventListener("click", addItem)
     }
-}
-    
+}    
 /*                         Agregar Productos al Carrito                   */
 function addItem (e) { 
 
@@ -87,23 +103,15 @@ function addItem (e) {
         carritoJSON = JSON.stringify(carrito)
         localStorage.setItem("Carrito", carritoJSON)
     }
-
     totalFinal= carrito.reduce((a, b ) => a + b.subtotal, 0)
     unidades= carrito.reduce((a, b ) => a + b.unidades, 0)
-
     renderizarCarro(carrito) 
-    // renderizarCartNav(carrito)
     renderizarTotal(carrito)      
 }
-
 /*                     Renderizar Carrito                     */
-
 function renderizarCarro(array){
-    
     carritoRender.innerHTML = ""
-    
     for (let producto of array) {
-        
         let cart = document.createElement("div")
         cart.className= "cart-render"
         cart.innerHTML= `
@@ -117,8 +125,6 @@ function renderizarCarro(array){
         <p class="quantity">${producto.unidades}</p>
         <div class="quantity">
         <img id="${producto.id}" class="chg-quantity update-cart add" src="images/arrow-up.png">
-      
-        
         <img id="${producto.id}" class="chg-quantity update-cart" src="images/arrow-down.png">
         </div>
         </div>
@@ -132,13 +138,11 @@ function renderizarCarro(array){
     // for(let a of add) {
     //     a.addEventListener ("click", addItem)
     // }
-    
     let remove = document.getElementsByClassName("chg-quantity update-cart")
     for(let b of remove) {
         b.addEventListener ("click", removeItem )
     }  
 }
-
 /*               Eliminar Items del Carrito            */
 function removeItem (e){
     
@@ -192,7 +196,6 @@ function totalRender (array){
     let clear = document.getElementById("clear")
     clear.addEventListener("click", borrarStorage )
 }
-
 function renderizarTotal (array) {
     total.innerHTML=""
     let totalResumen = document.createElement("div")
@@ -218,7 +221,6 @@ function renderizarTotal (array) {
     let clear = document.getElementById("clear")        
     clear.addEventListener("click", borrarStorage )
 }
-
 /*       Eliminar Carrito del LocalStorage  */
 function borrarStorage(){
     localStorage.removeItem("Carrito")
