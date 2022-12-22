@@ -28,6 +28,8 @@ let carritoRender = document.getElementById("cart-row")
 let carritoRender2 = document.getElementById("cart-row-2")
 let total = document.getElementById("total")
 let cartNav = document.getElementById("cart-nav")
+let botonCarrito = document.getElementById("cart-button")
+
 
 renderizar(productos)
 
@@ -214,3 +216,16 @@ function borrarStorage() {
     localStorage.removeItem("Carrito")
 }
 
+botonCarrito.addEventListener("click", esconder)
+
+function esconder(e) {
+    contenedor.innerHTML = ""
+
+    let boton = document.createElement("div")
+    boton.className = "boton-render"
+    boton.innerHTML = `
+        <a type="button" class="btn btn-success" href="index.html">Seguir comprando</a>
+        `
+    contenedor.append(boton)
+
+}

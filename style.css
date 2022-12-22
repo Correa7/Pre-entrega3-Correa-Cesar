@@ -149,3 +149,7 @@ h6 {
 .hidden {
 	display: none !important;
 }
+
+.boton-render {
+	margin-left: 100px;
+}
