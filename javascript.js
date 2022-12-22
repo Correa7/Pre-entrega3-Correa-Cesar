@@ -220,12 +220,21 @@ botonCarrito.addEventListener("click", esconder)
 
 function esconder(e) {
     contenedor.innerHTML = ""
-
-    let boton = document.createElement("div")
+    if (carrito.length == 0){
+        let boton = document.createElement("div")
     boton.className = "boton-render"
     boton.innerHTML = `
-        <a type="button" class="btn btn-success" href="index.html">Seguir comprando</a>
+        <a type="button" class="btn btn-success" href="index.html">Ir a la Tienda</a>
         `
     contenedor.append(boton)
+    } else{
+
+        let boton = document.createElement("div")
+        boton.className = "boton-render"
+        boton.innerHTML = `
+        <a type="button" class="btn btn-success" href="index.html">Seguir comprando</a>
+        `
+        contenedor.append(boton)
+    }
 
 }
