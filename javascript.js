@@ -1,6 +1,6 @@
 
 const productos = [
-    { id: 01, nombre: "La Remera de DIOS", categoria: "ROPA", precio: 99999.99, stock: 1, img: "./img/rem-6.jpg" },
+
     { id: 18, nombre: "Remera Optimus-Boxeo", categoria: "ROPA", precio: 2650, stock: 10, img: "./img/rem-5.webp" },
     { id: 02, nombre: "Remera Optimus-Grey", categoria: "ROPA", precio: 2499.99, stock: 10, img: "./img/rem-1.webp" },
     { id: 03, nombre: "Remera Diablus-Black", categoria: "ROPA", precio: 2299.99, stock: 10, img: "./img/rem-2.jpg" },
@@ -20,42 +20,49 @@ const productos = [
     { id: 17, nombre: "Pack Pesas", categoria: "DEPORTE", precio: 15299.99, stock: 3, img: "./img/dep-4.jpg" }
 ]
 
+let carrito = []
 let carritoJSON = ""
 let totalFinal = ""
 let unidades = ""
 let contenedor = document.getElementById("contenedor")
+let contenedorCarritoTotal = document.getElementById("contenedorCarritoTotal")
 let carritoRender = document.getElementById("cart-row")
-let carritoRender2 = document.getElementById("cart-row-2")
 let total = document.getElementById("total")
 let cartNav = document.getElementById("cart-nav")
 let botonCarrito = document.getElementById("cart-button")
-
-
-renderizar(productos)
-
-let carrito = []
-if (localStorage.getItem("Carrito")) {
-    carrito = JSON.parse(localStorage.getItem("Carrito"))
-    renderizarCarro(carrito)
-    totalRender(carrito)
-} else {
-    totalRenderVacio(carrito)
-}
-/*                       Buscador       Filtros                        */
 let ropa = document.getElementById("ropa")
 let calzado = document.getElementById("calzado")
 let deportes = document.getElementById("deporte")
+let input = document.getElementById("input")
+let button = document.getElementById("buscador")
+
+botonCarrito.addEventListener("click", esconder)
 ropa.addEventListener("click", filtroCategoria)
 calzado.addEventListener("click", filtroCategoria)
 deportes.addEventListener("click", filtroCategoria)
+button.addEventListener("click", buscar)
+
+renderizar(productos)
+
+comprobar(carrito)
+
+function comprobar() {
+
+    if (localStorage.getItem("Carrito")) {
+        carrito = JSON.parse(localStorage.getItem("Carrito"))
+        renderizarCarro(carrito)
+        totalRender(carrito)
+    } else {
+        totalRenderVacio(carrito)
+    }
+}
+/*                       Buscador       Filtros                        */
 function filtroCategoria(e) {
     e.preventDefault()
     let categoriafiltrado = productos.filter(producto => producto.categoria.toLowerCase() == e.target.id)
     renderizar(categoriafiltrado)
 }
-let input = document.getElementById("input")
-let button = document.getElementById("buscador")
-button.addEventListener("click", buscar)
+
 function buscar(e) {
     e.preventDefault()
     let productoFiltrado = productos.filter(producto => producto.nombre.toLowerCase().includes(input.value.toLowerCase()) || producto.categoria.toLowerCase().includes(input.value.toLowerCase()))
@@ -65,6 +72,9 @@ function buscar(e) {
 function renderizar(array) {
 
     contenedor.innerHTML = ""
+
+    contenedorCarritoTotal.className = "ocultar"
+
     for (const producto of array) {
 
         let tarjetaBody = document.createElement("div")
@@ -94,6 +104,7 @@ function addItem(e) {
     if (indexProduct != -1) {
         carrito[indexProduct].unidades++
         carrito[indexProduct].subtotal = carrito[indexProduct].precio * carrito[indexProduct].unidades
+     
         carritoJSON = JSON.stringify(carrito)
         localStorage.setItem("Carrito", carritoJSON)
     }
@@ -107,6 +118,7 @@ function addItem(e) {
     unidades = carrito.reduce((a, b) => a + b.unidades, 0)
     renderizarCarro(carrito)
     totalRender(carrito)
+
 }
 /*                     Renderizar Carrito                     */
 function renderizarCarro(array) {
@@ -172,11 +184,15 @@ function totalRender(array) {
     let totalResumen = document.createElement("div")
     totalResumen.className = "total"
     totalResumen.innerHTML = `
+    <a  id="seguirComprando" type="button" class="btn btn-success" href="#">Seguir comprando</a>
     <h5>Items: <strong>${unidades} </strong></h5>
     <h5>Total:<strong> $ ${totalFinal.toFixed(2)}</strong></h5>
     <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a>
     `
     total.append(totalResumen)
+
+    let seguirComprando = document.getElementById("seguirComprando")
+    seguirComprando.addEventListener("click", mostrarRender)
 
     cartNav.innerHTML = ""
     if (array.lenght != 0) {
@@ -199,42 +215,46 @@ function totalRenderVacio(array) {
     let totalResumen = document.createElement("div")
     totalResumen.className = "total"
     totalResumen.innerHTML = `
-    <h5>Items: <strong>  0 </strong></h5>
-    <h5>Total:<strong> $ 0.00 </strong></h5>
-    <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a>
-    `
+        <a  id="seguirComprando" type="button" class="btn btn-success" href="#">Seguir comprando</a>
+        <h5>Items: <strong>  0 </strong></h5>
+        <h5>Total:<strong> $ 0.00 </strong></h5>
+        <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a>
+        `
     total.append(totalResumen)
+
+    let seguirComprando = document.getElementById("seguirComprando")
+    seguirComprando.addEventListener("click", mostrarRender)
+
 
     cartNav.innerHTML = ""
     let parrafo = document.createElement("div")
     parrafo.className = "cart-total"
     parrafo.innerHTML = `<p>0</p>`
     cartNav.append(parrafo)
+
+}
+function esconder(e) {
+    contenedor.innerHTML = ""
+    contenedorCarritoTotal.className = "container"
+}
+function mostrarRender() {
+    renderizar(productos)
+    contenedorCarritoTotal.className = "ocultar"
 }
 /*       Eliminar Carrito del LocalStorage  */
 function borrarStorage() {
     localStorage.removeItem("Carrito")
+    // ssweetA ("Gracias por su compra", "success", 1500)
 }
 
-botonCarrito.addEventListener("click", esconder)
+// function sweetA (texto, icono, tiempo  ) {
+//     Swal.fire ( {
 
-function esconder(e) {
-    contenedor.innerHTML = ""
-    if (carrito.length == 0){
-        let boton = document.createElement("div")
-    boton.className = "boton-render"
-    boton.innerHTML = `
-        <a type="button" class="btn btn-success" href="index.html">Ir a la Tienda</a>
-        `
-    contenedor.append(boton)
-    } else{
+//         text : texto,
+//         icon : icono,
+//         time: tiempo,
+//     })
 
-        let boton = document.createElement("div")
-        boton.className = "boton-render"
-        boton.innerHTML = `
-        <a type="button" class="btn btn-success" href="index.html">Seguir comprando</a>
-        `
-        contenedor.append(boton)
-    }
+// }
 
-}
+
