@@ -24,6 +24,7 @@ let carrito = []
 let carritoJSON = ""
 let totalFinal = ""
 let unidades = ""
+let store = document.getElementById("store")
 let contenedor = document.getElementById("contenedor")
 let contenedorCarritoTotal = document.getElementById("contenedorCarritoTotal")
 let carritoRender = document.getElementById("cart-row")
@@ -35,7 +36,7 @@ let calzado = document.getElementById("calzado")
 let deportes = document.getElementById("deporte")
 let input = document.getElementById("input")
 let button = document.getElementById("buscador")
-
+store.addEventListener("click", buscar)
 botonCarrito.addEventListener("click", esconder)
 ropa.addEventListener("click", filtroCategoria)
 calzado.addEventListener("click", filtroCategoria)
@@ -61,6 +62,7 @@ function filtroCategoria(e) {
     e.preventDefault()
     let categoriafiltrado = productos.filter(producto => producto.categoria.toLowerCase() == e.target.id)
     renderizar(categoriafiltrado)
+
 }
 
 function buscar(e) {
@@ -70,10 +72,9 @@ function buscar(e) {
 }
 /*                           Renderizar productos                  */
 function renderizar(array) {
-
+    contenedor.className = "contenedor"
+    contenedorCarritoTotal.className = "hidden"
     contenedor.innerHTML = ""
-
-    contenedorCarritoTotal.className = "ocultar"
 
     for (const producto of array) {
 
@@ -92,8 +93,8 @@ function renderizar(array) {
     }
 
     let view = document.getElementsByClassName("btn btn-outline-success")
-    for (boton of view) {
-        boton.addEventListener("click", cartel)
+    for (btn of view) {
+        btn.addEventListener("click", cartel)
 
     }
 
@@ -199,7 +200,7 @@ function totalRender(array) {
     let totalResumen = document.createElement("div")
     totalResumen.className = "total"
     totalResumen.innerHTML = `
-    <a  id="seguirComprando" type="button" class="btn btn-success" href="#">Seguir comprando</a>
+    <a  id="seguirComprando" type="button" class="btn btn-outline-dark" href="#">Seguir comprando</a>
     <h5>Items: <strong>${unidades} </strong></h5>
     <h5>Total:<strong> $ ${totalFinal.toFixed(2)}</strong></h5>
     <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a>
@@ -223,8 +224,8 @@ function totalRender(array) {
     }
 
     let clear = document.getElementById("clear")
-    clear.addEventListener("click", borrarStorage, cartel)
-
+    clear.addEventListener("click", borrarStorage)
+    // clear.addEventListener("click", cartel)
 
 
 }
@@ -234,10 +235,9 @@ function totalRenderVacio(array) {
     let totalResumen = document.createElement("div")
     totalResumen.className = "total"
     totalResumen.innerHTML = `
-        <a  id="seguirComprando" type="button" class="btn btn-success" href="#">Seguir comprando</a>
+        <a  id="seguirComprando" type="button" class="btn btn-outline-dark" href="#">Seguir comprando</a>
         <h5>Items: <strong>  0 </strong></h5>
         <h5>Total:<strong> $ 0.00 </strong></h5>
-        <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a>
         `
     total.append(totalResumen)
 
@@ -253,34 +253,53 @@ function totalRenderVacio(array) {
 
 }
 function esconder(e) {
-    contenedor.innerHTML = ""
     contenedorCarritoTotal.className = "container"
+    contenedor.className = "hidden"
 }
 
 function mostrarRender() {
     renderizar(productos)
-    contenedorCarritoTotal.className = "ocultar"
+    contenedorCarritoTotal.className = "hidden"
 }
 /*       Eliminar Carrito del LocalStorage  */
 function borrarStorage() {
 
     localStorage.removeItem("Carrito")
-}
-
-function cartel() {
-    
 
     Swal.fire({
-
-        text: "Gracias por tu Compra",
+        title: 'Gracias por su compra!',
         icon: "success",
-        confirmButtonText: "Volver a la tienda",
-        position: "top-middle",
-
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
     })
+    carrito = []
+    contenedor.className = "hidden"
+    contenedorCarritoTotal.className = "container"
+
+    totalRenderVacio(carrito)
 
 }
 
+
+
+function cartel() {
+
+    Swal.fire({
+        title: "Proximamente!",
+        showConfirmButton: false,
+        timer: 1000,
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
+    })
+}
 
 function tostada(text, style) {
 
@@ -294,4 +313,5 @@ function tostada(text, style) {
 
     }).showToast();
 }
+
 
