@@ -85,11 +85,18 @@ function renderizar(array) {
             <h6><strong>${producto.nombre}</strong></h6>
             <h6 class= "precio"><strong>Price: $ ${producto.precio.toFixed(2)}</strong></h6><hr>
             <button id ="${producto.id}" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-            <a class="btn btn-outline-success" href="#">View</a>
+            <a id ="view" class="btn btn-outline-success" href="#">View</a>
         </div>
         `
         contenedor.append(tarjetaBody)
     }
+
+    let view = document.getElementsByClassName("btn btn-outline-success")
+    for (boton of view) {
+        boton.addEventListener("click", cartel)
+
+    }
+
     let agregarCarrito = document.getElementsByClassName('btn btn-outline-secondary add-btn update-cart')
     for (boton of agregarCarrito) {
         boton.addEventListener("click", addItem)
@@ -104,7 +111,7 @@ function addItem(e) {
     if (indexProduct != -1) {
         carrito[indexProduct].unidades++
         carrito[indexProduct].subtotal = carrito[indexProduct].precio * carrito[indexProduct].unidades
-     
+
         carritoJSON = JSON.stringify(carrito)
         localStorage.setItem("Carrito", carritoJSON)
     }
@@ -118,6 +125,10 @@ function addItem(e) {
     unidades = carrito.reduce((a, b) => a + b.unidades, 0)
     renderizarCarro(carrito)
     totalRender(carrito)
+    tostada("Producto agregado al carrito", {
+        background: "linear-gradient(to right,#047b89, #6fa5ab)",
+    })
+
 
 }
 /*                     Renderizar Carrito                     */
@@ -175,6 +186,10 @@ function removeItem(e) {
 
     renderizarCarro(carrito)
     totalRender(carrito)
+    tostada("Producto eliminado del carrito", {
+        background: "linear-gradient(to right,  #e92424,  #da5353)",
+    })
+
 }
 /*                   Renderizar Total de Precio y Unidades del Carrito             */
 function totalRender(array) {
@@ -206,8 +221,12 @@ function totalRender(array) {
         parrafo.innerHTML = `<p>0</p>`
         cartNav.append(parrafo)
     }
+
     let clear = document.getElementById("clear")
-    clear.addEventListener("click", borrarStorage)
+    clear.addEventListener("click", borrarStorage, cartel)
+
+
+
 }
 function totalRenderVacio(array) {
 
@@ -237,24 +256,42 @@ function esconder(e) {
     contenedor.innerHTML = ""
     contenedorCarritoTotal.className = "container"
 }
+
 function mostrarRender() {
     renderizar(productos)
     contenedorCarritoTotal.className = "ocultar"
 }
 /*       Eliminar Carrito del LocalStorage  */
 function borrarStorage() {
+
     localStorage.removeItem("Carrito")
-    // ssweetA ("Gracias por su compra", "success", 1500)
 }
 
-// function sweetA (texto, icono, tiempo  ) {
-//     Swal.fire ( {
+function cartel() {
+    
 
-//         text : texto,
-//         icon : icono,
-//         time: tiempo,
-//     })
+    Swal.fire({
 
-// }
+        text: "Gracias por tu Compra",
+        icon: "success",
+        confirmButtonText: "Volver a la tienda",
+        position: "top-middle",
 
+    })
+
+}
+
+
+function tostada(text, style) {
+
+    Toastify({
+        text: text,
+        style: style,
+        duration: 1000,
+        gravity: "bottom",
+        position: "right",
+
+
+    }).showToast();
+}
 
