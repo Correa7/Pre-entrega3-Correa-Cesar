@@ -24,7 +24,6 @@ let carrito = []
 let carritoJSON = ""
 let totalFinal = ""
 let unidades = ""
-let store = document.getElementById("store")
 let contenedor = document.getElementById("contenedor")
 let contenedorCarritoTotal = document.getElementById("contenedorCarritoTotal")
 let carritoRender = document.getElementById("cart-row")
@@ -36,7 +35,7 @@ let calzado = document.getElementById("calzado")
 let deportes = document.getElementById("deporte")
 let input = document.getElementById("input")
 let button = document.getElementById("buscador")
-store.addEventListener("click", buscar)
+
 botonCarrito.addEventListener("click", esconder)
 ropa.addEventListener("click", filtroCategoria)
 calzado.addEventListener("click", filtroCategoria)
@@ -44,11 +43,9 @@ deportes.addEventListener("click", filtroCategoria)
 button.addEventListener("click", buscar)
 
 renderizar(productos)
-
 comprobar(carrito)
 
 function comprobar() {
-
     if (localStorage.getItem("Carrito")) {
         carrito = JSON.parse(localStorage.getItem("Carrito"))
         renderizarCarro(carrito)
@@ -64,7 +61,6 @@ function filtroCategoria(e) {
     renderizar(categoriafiltrado)
 
 }
-
 function buscar(e) {
     e.preventDefault()
     let productoFiltrado = productos.filter(producto => producto.nombre.toLowerCase().includes(input.value.toLowerCase()) || producto.categoria.toLowerCase().includes(input.value.toLowerCase()))
@@ -95,12 +91,12 @@ function renderizar(array) {
     let view = document.getElementsByClassName("btn btn-outline-success")
     for (btn of view) {
         btn.addEventListener("click", cartel)
-
     }
 
     let agregarCarrito = document.getElementsByClassName('btn btn-outline-secondary add-btn update-cart')
     for (boton of agregarCarrito) {
         boton.addEventListener("click", addItem)
+
     }
 }
 /*                         Agregar Productos al Carrito                   */
@@ -203,7 +199,7 @@ function totalRender(array) {
     <a  id="seguirComprando" type="button" class="btn btn-outline-dark" href="#">Seguir comprando</a>
     <h5>Items: <strong>${unidades} </strong></h5>
     <h5>Total:<strong> $ ${totalFinal.toFixed(2)}</strong></h5>
-    <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-success" href="index.html">Pagar</a>
+    <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-outline-success" href="#">Pagar</a>
     `
     total.append(totalResumen)
 
@@ -225,12 +221,8 @@ function totalRender(array) {
 
     let clear = document.getElementById("clear")
     clear.addEventListener("click", borrarStorage)
-    // clear.addEventListener("click", cartel)
-
-
 }
 function totalRenderVacio(array) {
-
     total.innerHTML = ""
     let totalResumen = document.createElement("div")
     totalResumen.className = "total"
@@ -240,11 +232,8 @@ function totalRenderVacio(array) {
         <h5>Total:<strong> $ 0.00 </strong></h5>
         `
     total.append(totalResumen)
-
     let seguirComprando = document.getElementById("seguirComprando")
     seguirComprando.addEventListener("click", mostrarRender)
-
-
     cartNav.innerHTML = ""
     let parrafo = document.createElement("div")
     parrafo.className = "cart-total"
@@ -256,19 +245,19 @@ function esconder(e) {
     contenedorCarritoTotal.className = "container"
     contenedor.className = "hidden"
 }
-
 function mostrarRender() {
     renderizar(productos)
     contenedorCarritoTotal.className = "hidden"
 }
 /*       Eliminar Carrito del LocalStorage  */
+
 function borrarStorage() {
-
     localStorage.removeItem("Carrito")
-
     Swal.fire({
         title: 'Gracias por su compra!',
         icon: "success",
+        showConfirmButton: false,
+        timer: 2500,
         showClass: {
             popup: 'animate__animated animate__fadeInDown'
         },
@@ -277,17 +266,13 @@ function borrarStorage() {
         }
     })
     carrito = []
-    contenedor.className = "hidden"
-    contenedorCarritoTotal.className = "container"
-
     totalRenderVacio(carrito)
-
+    renderizarCarro(carrito)
+    renderizar(productos)
 }
 
-
-
+/*                    Alerts / Librerias                  */
 function cartel() {
-
     Swal.fire({
         title: "Proximamente!",
         showConfirmButton: false,
@@ -302,15 +287,12 @@ function cartel() {
 }
 
 function tostada(text, style) {
-
     Toastify({
         text: text,
         style: style,
         duration: 1000,
         gravity: "bottom",
         position: "right",
-
-
     }).showToast();
 }
 
