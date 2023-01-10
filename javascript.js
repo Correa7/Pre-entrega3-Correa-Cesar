@@ -1,44 +1,44 @@
 
-const productos = [
+// const productos = [
 
-    { id: 25, nombre: "Set femenino Diabulus", categoria: "DEPORTE", precio: 6000, stock: 10, img: "./img/l7.jpg" },
-    { id: 18, nombre: "Remera Optimus-Boxeo", categoria: "ROPA", precio: 2650, stock: 10, img: "./img/rem-5.webp" },
-    { id: 09, nombre: "Adidas Super Star Black ", categoria: "CALZADO", precio: 32500, stock: 10, img: "./img/zap-3.jpg" },
-    { id: 21, nombre: "Short y Remera Deep-Black", categoria: "ROPA", precio: 4600, stock: 10, img: "./img/p1.webp" },
-    { id: 18, nombre: "Remera light-Grey Men", categoria: "ROPA", precio: 3500, stock: 10, img: "./img/l2.jpg" },
-    { id: 12, nombre: "Guantes Everlast Box-Black", categoria: "DEPORTE", precio: 10300, stock: 3, img: "./img/dep-1.jpg" },
-    { id: 02, nombre: "Remera Optimus-Grey", categoria: "ROPA", precio: 2500, stock: 10, img: "./img/rem-1.webp" },
-    { id: 22, nombre: "Conjunto Termico Hombre", categoria: "ROPA", precio: 5500, stock: 10, img: "./img/p3.jpg" },
-    { id: 23, nombre: "Conjunto Termico Mujer", categoria: "ROPA", precio: 5500, stock: 10, img: "./img/p4.webp" },
-    { id: 03, nombre: "Remera Diablus-Black", categoria: "ROPA", precio: 2300, stock: 10, img: "./img/rem-2.jpg" },
-    { id: 08, nombre: "Adidas Super Star B-Colors ", categoria: "CALZADO", precio: 32500, stock: 10, img: "./img/zap-2.jpg" },
-    { id: 04, nombre: "Remera Diablus-White", categoria: "ROPA", precio: 2300, stock: 10, img: "./img/rem-4.webp" },
-    { id: 05, nombre: "Remera Diablus-Grey", categoria: "ROPA", precio: 2300, stock: 10, img: "./img/rem-3.webp" },
-    { id: 19, nombre: "Faja Hombre", categoria: "DEPORTE", precio: 2000, stock: 3, img: "./img/k1.jpg" },
-    { id: 26, nombre: "Calzas Gimnasia Mujer", categoria: "DEPORTE", precio: 3000, stock: 3, img: "./img/p10.jpg" },
-    { id: 24, nombre: "Top Deportivo Optimus", categoria: "DEPORTE", precio: 2500, stock: 10, img: "./img/l6.jpg" },
-    { id: 06, nombre: "Adidas Super Star W-Lisa", categoria: "CALZADO", precio: 28500, stock: 10, img: "./img/zap-5.jpg" },
-    { id: 07, nombre: "Adidas Super Star W-Colors", categoria: "CALZADO", precio: 32500, stock: 10, img: "./img/zap-1.jpg" },
-    { id: 15, nombre: "Colchoneta Everlast", categoria: "DEPORTE", precio: 2500, stock: 5, img: "./img/dep-5.webp" },
-    { id: 10, nombre: "Adidas Super Star Pink ", categoria: "CALZADO", precio: 30000, stock: 10, img: "./img/zap-4.jpg" },
-    { id: 11, nombre: "Guantes Everlast Box-White ", categoria: "DEPORTE", precio: 10300, stock: 3, img: "./img/dep.webp" },
-    { id: 13, nombre: "Pack Everlast Box", categoria: "DEPORTE", precio: 30500, stock: 3, img: "./img/dep-3.webp" },
-    { id: 14, nombre: "Vendas Everlast", categoria: "DEPORTE", precio: 1200, stock: 4, img: "./img/dep-2.webp" },
-    { id: 16, nombre: "Pack Bandas", categoria: "DEPORTE", precio: 5000, stock: 3, img: "./img/dep-6.jpg" },
-    { id: 17, nombre: "Pack Pesas", categoria: "DEPORTE", precio: 15300, stock: 3, img: "./img/dep-4.jpg" },
-    { id: 20, nombre: "Faja Mujer", categoria: "DEPORTE", precio: 2000, stock: 3, img: "./img/l9.jpg" },
-]
+//     { id: 25, nombre: "Set femenino Diabulus", categoria: "DEPORTE", precio: 6000, stock: 10, img: "./img/l7.jpg" },
+//     { id: 18, nombre: "Remera Optimus-Boxeo", categoria: "ROPA", precio: 2650, stock: 10, img: "./img/rem-5.webp" },
+//     { id: 09, nombre: "Adidas Super Star Black ", categoria: "CALZADO", precio: 32500, stock: 10, img: "./img/zap-3.jpg" },
+//     { id: 21, nombre: "Short y Remera Deep-Black", categoria: "ROPA", precio: 4600, stock: 10, img: "./img/p1.webp" },
+//     { id: 18, nombre: "Remera light-Grey Men", categoria: "ROPA", precio: 3500, stock: 10, img: "./img/l2.jpg" },
+//     { id: 12, nombre: "Guantes Everlast Box-Black", categoria: "DEPORTE", precio: 10300, stock: 3, img: "./img/dep-1.jpg" },
+//     { id: 02, nombre: "Remera Optimus-Grey", categoria: "ROPA", precio: 2500, stock: 10, img: "./img/rem-1.webp" },
+//     { id: 22, nombre: "Conjunto Termico Hombre", categoria: "ROPA", precio: 5500, stock: 10, img: "./img/p3.jpg" },
+//     { id: 23, nombre: "Conjunto Termico Mujer", categoria: "ROPA", precio: 5500, stock: 10, img: "./img/p4.webp" },
+//     { id: 03, nombre: "Remera Diablus-Black", categoria: "ROPA", precio: 2300, stock: 10, img: "./img/rem-2.jpg" },
+//     { id: 08, nombre: "Adidas Super Star B-Colors ", categoria: "CALZADO", precio: 32500, stock: 10, img: "./img/zap-2.jpg" },
+//     { id: 04, nombre: "Remera Diablus-White", categoria: "ROPA", precio: 2300, stock: 10, img: "./img/rem-4.webp" },
+//     { id: 05, nombre: "Remera Diablus-Grey", categoria: "ROPA", precio: 2300, stock: 10, img: "./img/rem-3.webp" },
+//     { id: 19, nombre: "Faja Hombre", categoria: "DEPORTE", precio: 2000, stock: 3, img: "./img/k1.jpg" },
+//     { id: 26, nombre: "Calzas Gimnasia Mujer", categoria: "DEPORTE", precio: 3000, stock: 3, img: "./img/p10.jpg" },
+//     { id: 24, nombre: "Top Deportivo Optimus", categoria: "DEPORTE", precio: 2500, stock: 10, img: "./img/l6.jpg" },
+//     { id: 06, nombre: "Adidas Super Star W-Lisa", categoria: "CALZADO", precio: 28500, stock: 10, img: "./img/zap-5.jpg" },
+//     { id: 07, nombre: "Adidas Super Star W-Colors", categoria: "CALZADO", precio: 32500, stock: 10, img: "./img/zap-1.jpg" },
+//     { id: 15, nombre: "Colchoneta Everlast", categoria: "DEPORTE", precio: 2500, stock: 5, img: "./img/dep-5.webp" },
+//     { id: 10, nombre: "Adidas Super Star Pink ", categoria: "CALZADO", precio: 30000, stock: 10, img: "./img/zap-4.jpg" },
+//     { id: 11, nombre: "Guantes Everlast Box-White ", categoria: "DEPORTE", precio: 10300, stock: 3, img: "./img/dep.webp" },
+//     { id: 13, nombre: "Pack Everlast Box", categoria: "DEPORTE", precio: 30500, stock: 3, img: "./img/dep-3.webp" },
+//     { id: 14, nombre: "Vendas Everlast", categoria: "DEPORTE", precio: 1200, stock: 4, img: "./img/dep-2.webp" },
+//     { id: 16, nombre: "Pack Bandas", categoria: "DEPORTE", precio: 5000, stock: 3, img: "./img/dep-6.jpg" },
+//     { id: 17, nombre: "Pack Pesas", categoria: "DEPORTE", precio: 15300, stock: 3, img: "./img/dep-4.jpg" },
+//     { id: 20, nombre: "Faja Mujer", categoria: "DEPORTE", precio: 2000, stock: 3, img: "./img/l9.jpg" },
+// ]
 
-// let url = 'data.json'
-// console.log(url)
+// pageWeb(productos)
 
-fetch('https://jsonplaceholder.typicode.com/todos/')
+
+let url = './data.json'
+fetch(url)
 
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => pageWeb(data))
     .catch((error) => console.log(error))
 
-pageWeb(productos)
 
 function pageWeb(productos) {
 
@@ -323,3 +323,6 @@ function pageWeb(productos) {
     }
 
 }
+
+
+
