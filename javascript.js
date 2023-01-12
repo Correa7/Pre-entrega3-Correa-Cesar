@@ -276,10 +276,14 @@ function pageWeb(productos) {
     function borrarStorage() {
         localStorage.removeItem("Carrito")
         Swal.fire({
-            title: 'Gracias por su compra!',
+            title: '<hr><strong>Gracias por su compra!</strong><br><br><br>',
+            imageUrl: './images/logo.png',
+            imageHeight: 100,
+            imageAlt: 'logo',
             icon: "success",
             showConfirmButton: false,
-            timer: 2000,
+            backdrop: `rgba(193, 188, 190, 0.65)`,
+            timer: 2500,
             showClass: {
                 popup: 'animate__animated animate__fadeInDown'
             },
