@@ -1,4 +1,4 @@
-
+/*             App sin Fetch          */
 // const productos = [
 
 //     { id: 25, nombre: "Set femenino Diabulus", categoria: "DEPORTE", precio: 6000, stock: 10, img: "./img/l7.jpg" },
@@ -29,8 +29,10 @@
 //     { id: 20, nombre: "Faja Mujer", categoria: "DEPORTE", precio: 2000, stock: 3, img: "./img/l9.jpg" },
 // ]
 
+
 // pageWeb(productos)
 
+/*             App con Fetch              */
 
 let url = './data.json'
 fetch(url)
@@ -39,7 +41,7 @@ fetch(url)
     .then((data) => pageWeb(data))
     .catch((error) => console.log(error))
 
-
+/*              app Page                   */
 function pageWeb(productos) {
 
 
@@ -59,18 +61,19 @@ function pageWeb(productos) {
     let deportes = document.getElementById("deporte")
     let input = document.getElementById("input")
     let button = document.getElementById("buscador")
-
+    let store = document.getElementById("store")
     botonCarrito.addEventListener("click", esconder)
     ropa.addEventListener("click", filtroCategoria)
     calzado.addEventListener("click", filtroCategoria)
     deportes.addEventListener("click", filtroCategoria)
     button.addEventListener("click", buscar)
+    store.addEventListener("click", renderizarTodo)
 
     renderizar(productos)
     comprobar(carrito)
 
-    function comprobar() {
 
+    function comprobar() {
         if (localStorage.getItem("Carrito")) {
             carrito = JSON.parse(localStorage.getItem("Carrito"))
             renderizarCarro(carrito)
@@ -79,12 +82,15 @@ function pageWeb(productos) {
             totalRenderVacio(carrito)
         }
     }
+    function renderizarTodo(e) {
+        e.preventDefault()
+        renderizar(productos)
+    }
     /*                       Buscador       Filtros                        */
     function filtroCategoria(e) {
         e.preventDefault()
-        let categoriafiltrado = productos.filter(producto => producto.categoria.toLowerCase() == e.target.id)
-        renderizar(categoriafiltrado)
-
+        let categoriaFiltrado = productos.filter(producto => producto.categoria.toLowerCase() == e.target.id)
+        renderizar(categoriaFiltrado)
     }
     function buscar(e) {
         e.preventDefault()
@@ -98,9 +104,7 @@ function pageWeb(productos) {
         contenedor.innerHTML = ""
 
         for (const producto of array) {
-
             let tarjetaBody = document.createElement("div")
-            // tarjetaBody.className = "col-lg-4"
             tarjetaBody.className = "tarjetabody"
             tarjetaBody.innerHTML = `
                 <div class="div-img" ><img class="thumbnail" src="${producto.img}"></div>
@@ -113,16 +117,13 @@ function pageWeb(productos) {
                 `
             contenedor.append(tarjetaBody)
         }
-
         let view = document.getElementsByClassName("btn btn-outline-success")
         for (btn of view) {
             btn.addEventListener("click", cartel)
         }
-
         let agregarCarrito = document.getElementsByClassName('btn btn-outline-secondary add-btn update-cart')
         for (boton of agregarCarrito) {
             boton.addEventListener("click", addItem)
-
         }
     }
     /*                         Agregar Productos al Carrito                   */
@@ -134,13 +135,11 @@ function pageWeb(productos) {
         if (indexProduct != -1) {
             carrito[indexProduct].unidades++
             carrito[indexProduct].subtotal = carrito[indexProduct].precio * carrito[indexProduct].unidades
-
             carritoJSON = JSON.stringify(carrito)
             localStorage.setItem("Carrito", carritoJSON)
         }
         else {
             carrito.push({ id: productoBuscado.id, nombre: productoBuscado.nombre, categoria: productoBuscado.categoria, precio: productoBuscado.precio, subtotal: productoBuscado.precio, unidades: 1, img: productoBuscado.img })
-
             carritoJSON = JSON.stringify(carrito)
             localStorage.setItem("Carrito", carritoJSON)
         }
@@ -151,8 +150,6 @@ function pageWeb(productos) {
         tostada("Producto agregado al carrito", {
             background: "linear-gradient(to right,#047b89, #6fa5ab)",
         })
-
-
     }
     /*                     Renderizar Carrito                     */
     function renderizarCarro(array) {
@@ -231,7 +228,6 @@ function pageWeb(productos) {
 
         let seguirComprando = document.getElementById("seguirComprando")
         seguirComprando.addEventListener("click", mostrarRender)
-
         cartNav.innerHTML = ""
         if (array.lenght != 0) {
             let parrafo = document.createElement("div")
@@ -296,7 +292,6 @@ function pageWeb(productos) {
         renderizarCarro(carrito)
         renderizar(productos)
     }
-
     /*                    Alerts / Librerias                  */
     function cartel() {
         Swal.fire({
@@ -311,7 +306,6 @@ function pageWeb(productos) {
             }
         })
     }
-
     function tostada(text, style) {
         Toastify({
             text: text,
@@ -323,6 +317,5 @@ function pageWeb(productos) {
     }
 
 }
-
 
 
