@@ -1,4 +1,4 @@
-/*             App sin Fetch          */
+
 // const productos = [
 
 //     { id: 25, nombre: "Set femenino Diabulus", categoria: "DEPORTE", precio: 6000, stock: 10, img: "./img/l7.jpg" },
@@ -104,14 +104,16 @@ function pageWeb(productos) {
         contenedor.innerHTML = ""
 
         for (const producto of array) {
+            /* Desestructuracion en parametros */
+            let { nombre, img, precio, id } = producto
             let tarjetaBody = document.createElement("div")
             tarjetaBody.className = "tarjetabody"
             tarjetaBody.innerHTML = `
-                <div class="div-img" ><img class="thumbnail" src="${producto.img}"></div>
+                <div class="div-img" ><img class="thumbnail" src="${img}"></div>
                 <div class="box-element product">
-                    <h6><strong>${producto.nombre}</strong></h6>
-                    <h6 class= "precio"><strong>Price: $ ${producto.precio.toFixed(2)}</strong></h6><hr>
-                    <button id ="${producto.id}" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                    <h6><strong>${nombre}</strong></h6>
+                    <h6 class= "precio"><strong>Price: $ ${precio.toFixed(2)}</strong></h6><hr>
+                    <button id ="${id}" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
                     <a id ="view" class="btn btn-outline-success" href="#">View</a>
                 </div>
                 `
@@ -155,21 +157,23 @@ function pageWeb(productos) {
     function renderizarCarro(array) {
         carritoRender.innerHTML = ""
         for (let producto of array) {
+            /* Desestructuracion en parametros */
+            let { nombre, img, precio, unidades, id, subtotal } = producto
             let cart = document.createElement("div")
             cart.className = "cart-render"
             cart.innerHTML = `
                 <div class="cart-row">
-                <div  style="flex:2"><img class="row-image" src="${producto.img}"></div>
-                <div  style="flex:2"><p class="cart-p">${producto.nombre}</p></div>
-                <div  style="flex:1"><p class="cart-p">$${producto.precio.toFixed(2)}</p></div>
+                <div  style="flex:2"><img class="row-image" src="${img}"></div>
+                <div  style="flex:2"><p class="cart-p">${nombre}</p></div>
+                <div  style="flex:1"><p class="cart-p">$${precio.toFixed(2)}</p></div>
                 <div style="flex:1">
-                <p class="quantity">${producto.unidades}</p>
+                <p class="quantity">${unidades}</p>
                 <div class="quantity">
-                <img id="${producto.id}" class="chg-quantity update-cart " src="images/arrow-up.png">
-                <img id="${producto.id}" class="chg-quantity-2 update-cart" src="images/arrow-down.png">
+                <img id="${id}" class="chg-quantity update-cart " src="images/arrow-up.png">
+                <img id="${id}" class="chg-quantity-2 update-cart" src="images/arrow-down.png">
                 </div>
                 </div>
-                <div style="flex:1"><p class="cart-p">$${producto.subtotal.toFixed(2)}</p></div>
+                <div style="flex:1"><p class="cart-p">$${subtotal.toFixed(2)}</p></div>
                 </div>
                 `
             carritoRender.append(cart)
