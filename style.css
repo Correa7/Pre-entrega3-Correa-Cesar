@@ -38,6 +38,13 @@ h6 {
 	padding: 10px;
 }
 
+.box-element-2 {
+	box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 1px;
+}
+
 .tabla {
 	margin: 5px
 }
@@ -123,7 +130,7 @@ h6 {
 	display: flex;
 	align-items: flex-stretch;
 	padding-bottom: 10px;
-	margin-bottom: 10px;
+	margin: 10px;
 	border-bottom: 1px solid #ececec;
 }
 
@@ -174,14 +181,56 @@ h6 {
 	grid-row-gap: 150px;
 }
 
+
 .tarjetabody {
 	width: 300px;
 	height: 200px;
 	margin: 5px;
 }
 
-/*               Break points                */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 100px;
 
+	left: 0;
+	top: 0;
+	width: 100%;
+
+	height: 100%;
+
+	overflow: auto;
+
+	background-color: rgb(0, 0, 0);
+
+	background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+.modal-content {
+	background-color: #fefefe;
+	margin: auto;
+	padding: 10px;
+	border: 1px solid #888;
+	width: 80%;
+}
+
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/*               Break points                */
 @media screen and (max-width: 1288px) {
 	.contenedor {
 		padding: 20px;
@@ -200,6 +249,7 @@ h6 {
 
 @media screen and (max-width: 965px) {
 	.contenedor {
+
 		padding: 20px;
 		margin-top: 30px;
 		margin-left: 35px;
@@ -254,10 +304,12 @@ h6 {
 		font-size: 15px;
 	}
 
+
 }
 
 @media screen and (max-width: 376px) {
 	.contenedor {
+
 		padding: 20px;
 		margin-top: 30px;
 		margin-left: 10px;
@@ -267,10 +319,12 @@ h6 {
 		grid-column-gap: 10px;
 		grid-row-gap: 150px;
 	}
+
 }
 
 @media screen and (max-width: 326px) {
 	.contenedor {
+
 		padding: 5px;
 		margin-top: 30px;
 		margin-left: 0px;
@@ -280,4 +334,6 @@ h6 {
 		grid-column-gap: 10px;
 		grid-row-gap: 150px;
 	}
+
+
 }

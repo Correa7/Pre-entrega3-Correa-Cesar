@@ -42,9 +42,9 @@ fetch(url)
     .catch((error) => console.log(error))
 
 /*              app Page                   */
+
+
 function pageWeb(productos) {
-
-
 
     let carrito = []
     let carritoJSON = ""
@@ -62,6 +62,8 @@ function pageWeb(productos) {
     let input = document.getElementById("input")
     let button = document.getElementById("buscador")
     let store = document.getElementById("store")
+    let modal = document.getElementById("myModal");
+    let span = document.getElementsByClassName("close")[0];
     botonCarrito.addEventListener("click", esconder)
     ropa.addEventListener("click", filtroCategoria)
     calzado.addEventListener("click", filtroCategoria)
@@ -71,7 +73,6 @@ function pageWeb(productos) {
 
     renderizar(productos)
     comprobar(carrito)
-
 
     function comprobar() {
         if (localStorage.getItem("Carrito")) {
@@ -99,10 +100,7 @@ function pageWeb(productos) {
     }
     /*                           Renderizar productos                  */
     function renderizar(array) {
-        contenedor.className = "contenedor"
-        contenedorCarritoTotal.className = "hidden"
         contenedor.innerHTML = ""
-
         for (const producto of array) {
             /* Desestructuracion en parametros */
             let { nombre, img, precio, id } = producto
@@ -130,7 +128,6 @@ function pageWeb(productos) {
     }
     /*                         Agregar Productos al Carrito                   */
     function addItem(e) {
-
         let productoBuscado = productos.find(producto => producto.id == e.target.id)
         let indexProduct = carrito.findIndex(producto => producto.id == productoBuscado.id)
 
@@ -189,7 +186,6 @@ function pageWeb(productos) {
     }
     /*               Eliminar Items del Carrito            */
     function removeItem(e) {
-
         let productoBuscado = productos.find(producto => producto.id == e.target.id)
         let indexProduct = carrito.findIndex(producto => producto.id == productoBuscado.id)
         if (indexProduct != -1) {
@@ -223,15 +219,16 @@ function pageWeb(productos) {
         let totalResumen = document.createElement("div")
         totalResumen.className = "total"
         totalResumen.innerHTML = `
-            <a  style="margin:5px" id="seguirComprando" type="button" class="btn btn-outline-dark" href="#">Store</a>
+            <span class="close">&times;</span> 
             <h5 class="totalh5" >Items: <strong>${unidades} </strong></h5>
             <h5 class="totalh5" >Total:<strong> $ ${totalFinal.toFixed(2)}</strong></h5>
             <a id="clear" style="float:right; margin:5px;" type="button" class="btn btn-outline-success" href="#">Pagar</a>
             `
         total.append(totalResumen)
-
-        let seguirComprando = document.getElementById("seguirComprando")
-        seguirComprando.addEventListener("click", mostrarRender)
+        let span = document.getElementsByClassName("close")[0];
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
         cartNav.innerHTML = ""
         if (array.lenght != 0) {
             let parrafo = document.createElement("div")
@@ -253,30 +250,24 @@ function pageWeb(productos) {
         let totalResumen = document.createElement("div")
         totalResumen.className = "total"
         totalResumen.innerHTML = `
-                <a style="margin:5px"  id="seguirComprando" type="button" class="btn btn-outline-dark" href="#">Store</a>
+                <span class="close">&times;</span> 
                 <h5 class="totalh5">Items: <strong>  0 </strong></h5>
                 <h5 class="totalh5">Total:<strong> $ 0.00 </strong></h5>
                 `
         total.append(totalResumen)
-        let seguirComprando = document.getElementById("seguirComprando")
-        seguirComprando.addEventListener("click", mostrarRender)
         cartNav.innerHTML = ""
         let parrafo = document.createElement("div")
         parrafo.className = "cart-total"
         parrafo.innerHTML = `<p>0</p>`
         cartNav.append(parrafo)
 
-    }
-    function esconder(e) {
-        contenedorCarritoTotal.className = "container"
-        contenedor.className = "hidden"
-    }
-    function mostrarRender() {
-        renderizar(productos)
-        contenedorCarritoTotal.className = "hidden"
+        let span = document.getElementsByClassName("close")[0];
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
     }
     /*       Eliminar Carrito del LocalStorage  */
-
     function borrarStorage() {
         localStorage.removeItem("Carrito")
         Swal.fire({
@@ -295,6 +286,8 @@ function pageWeb(productos) {
                 popup: 'animate__animated animate__fadeOutUp'
             }
         })
+        contenedorCarritoTotal.className = "container"
+        modal.style.display = "none";
         carrito = []
         totalRenderVacio(carrito)
         renderizarCarro(carrito)
@@ -322,6 +315,15 @@ function pageWeb(productos) {
             gravity: "bottom",
             position: "right",
         }).showToast();
+    }
+    /*                   Modal                  */
+    function esconder(e) {
+        modal.style.display = "block";
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
 
 }
